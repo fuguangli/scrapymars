@@ -1,20 +1,25 @@
-#这可能是目前 使用最简单的功能强大的java爬虫框架
+# 这可能是目前 使用最简单的功能强大的java爬虫框架  
 
-##特征：可使用性、高扩展性、功能强大
-##宗旨：站在开发者的角度，让使用变得更简单
-######1、软件与spring框架完美契合，配置成bean，即是插拔式服务
-######2、主要面向接口编程，扩展性好，你可以根据自己的需求进行扩展
-######3、软件内置的下载器集成了js引擎
-######4、软件内置的下载器已经集成了代理，根据需求配置代理即可
-######5、软件内置了定时器，可以用作任务放入系统
+## 特征：可使用性、高扩展性、功能强大  
 
-##作者：fuguangli
-##联系方式：businessfgl@163.com
+## 宗旨：站在开发者的角度，让使用变得更简单
+1. 软件与spring框架完美契合，配置成bean，即是插拔式服务
+2. 主要面向接口编程，扩展性好，你可以根据自己的需求进行扩展
+3. 软件内置的下载器集成了js引擎
+4. 软件内置的下载器已经集成了代理，根据需求配置代理即可
+5. 软件内置了定时器，可以用作任务放入系统
 
-#软件的使用
-####一、安装
-#####(1)核心依赖：
-    <dependency>
+## 作者：fuguangli
+
+## 联系方式：businessfgl@163.com
+
+# 软件的使用
+
+#### 一、安装
+
+##### (1)核心依赖：
+
+            <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
                 <version>2.28</version>
@@ -44,9 +49,9 @@
                 <artifactId>jsoup</artifactId>
                 <version>1.11.2</version>
             </dependency>
-#####(2)将源代码打包成jar放入系统的依赖
+##### (2)将源代码打包成jar放入系统的依赖
 
-####二、举例
+#### 二、举例
     <bean id="downloader" class="com.automata.downloader.Downloader" init-method="initClient">
             <property name="downloaderSelect" value="2"/>
             <property name="timeout" value="10000"/>
@@ -128,7 +133,8 @@
             <!--如果你想使用程序内置的定时器，不断执行程序，请使用：-->
             <property name="scheduler" ref="alwaysScheduler"/>
         </bean>
-#####如果你的系统没有使用spring，请参考以下代码进行初始化：
+##### 如果你的系统没有使用spring，请参考以下代码进行初始化：
+
     List<String> startUrls=new ArrayList<>();
     startUrls.add("https://github.com");
     Downloader downloader = new Downloader();
@@ -140,8 +146,8 @@
 
 
 
-######软件完全开源，制作不易，如果你想支持作者的话：
+###### 软件完全开源，制作不易，如果你想支持作者的话：
 ![谢谢您的支持](https://thumbnail0.baidupcs.com/thumbnail/246b699f3q2103e16972c34eec97f4d8?fid=4011447265-250528-978965418075103&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-I%2b%2btJJ9uFtWYCgaKa6QNV%2bVnXIA%3d&expires=8h&chkbd=0&chkv=0&dp-logid=8387032185978574825&dp-callid=0&time=1577512800&size=c1280_u720&quality=90&vuk=4011447265&ft=image&autopolicy=1)
 ![谢谢您的支持](https://thumbnail0.baidupcs.com/thumbnail/10a4a889bp90b18f99d33f0ad1d012ff?fid=4011447265-250528-540442316933461&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-BIzIW4%2fFQp%2fptQQqpsDrGeesuWs%3d&expires=8h&chkbd=0&chkv=0&dp-logid=8387256762023794383&dp-callid=0&time=1577516400&size=c1280_u720&quality=90&vuk=4011447265&ft=image&autopolicy=1)
 
-######感谢您的支持！
+###### 感谢您的支持！
