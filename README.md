@@ -133,6 +133,7 @@
             <!--如果你想使用程序内置的定时器，不断执行程序，请使用：-->
             <property name="scheduler" ref="alwaysScheduler"/>
         </bean>
+##### 如果你没有代理、处理url等需求，那么你仅需要实现<code>com.automata.parser.IResponseParser</code>接口进行解析
 ##### 如果你的系统没有使用spring，请参考以下代码进行初始化：
 
     List<String> startUrls=new ArrayList<>();
