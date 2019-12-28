@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM
+        "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %5p (%F-%L) - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="htmlunit" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${catalina.base}/logs/app/htmlunit.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %m%n"/>
+        </layout>
+    </appender>
+    <logger name="com.automata" additivity="true">
+        <level value="DEBUG"/>
+        <!--<appender-ref ref="stdout"/>-->
+    </logger>
+    <logger name="sample.parser" additivity="true">
+        <level value="DEBUG"/>
+        <!--<appender-ref ref="stdout"/>-->
+    </logger>
+    <logger name="com.hemacp.common.HttpUtil" additivity="true">
+        <level value="ERROR"/>
+        <!--<appender-ref ref="stdout"/>-->
+    </logger>
+
+    <!--HTMLUNIT去除日志的配置-->
+    <logger name="com.gargoylesoftware.htmlunit" additivity="false">
+        <level value="off"/>
+        <appender-ref ref="htmlunit"/>
+    </logger>
+    <!--HTMLUNIT去除日志的配置-->
+
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="stdout"/>
+    </root>
+</log4j:configuration>

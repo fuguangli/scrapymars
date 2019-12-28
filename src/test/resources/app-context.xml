@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="downloader" class="com.automata.downloader.Downloader" init-method="initClient">
+        <property name="downloaderSelect" value="2"/>
+        <property name="timeout" value="10000"/>
+        <!--<property name="downloadWares">
+            <list>
+                <bean class="sample.downloadwares.HeaderWare"></bean>
+            </list>
+        </property>-->
+        <!--<property name="proxyWare">
+            <bean class="com.automata.downwares.ProxyWare">
+                <property name="proxyHost" value=""/>
+                <property name="proxyPort" value=""/>
+                <property name="proxyUser" value=""/>
+                <property name="proxyPass" value=""/>
+            </bean>
+        </property>-->
+    </bean>
+
+    <bean id="internalUrlQueue" class="com.automata.queues.internal.InternalUrlQueue">
+    </bean>
+
+    <bean id="internalResponseQueue" class="com.automata.queues.internal.InternalResponseQueue">
+    </bean>
+
+    <bean id="threadPools" class="com.automata.threads.ThreadPools">
+        <constructor-arg index="0" value="5"></constructor-arg>
+        <constructor-arg index="1" value="20"></constructor-arg>
+        <constructor-arg index="2" value="5"></constructor-arg>
+    </bean>
+
+    <bean id="parser" class="sample.parser.SampleParser"></bean>
+
+
+    <!--<bean id="onceScheduler" class="com.automata.schedule.mode.OnceScheduler">
+        <property name="downloader" ref="downloader"/>
+        <property name="responseParser" ref="parser"/>
+        <property name="startUrls">
+            <list>
+                <value>https://github.com</value>
+            </list>
+        </property>
+    </bean>-->
+    <bean id="oneCycleScheduler" class="com.automata.schedule.mode.OneCycleScheduler">
+        <property name="downloader" ref="downloader"/>
+        <property name="responseParser" ref="parser"/>
+        <property name="startUrls">
+            <list>
+                <value>https://github.com</value>
+                <value>https://stackoverflow.com/</value>
+            </list>
+        </property>
+        <property name="threadPools" ref="threadPools"/>
+        <property name="pollWaitSeconds" value="30"/>
+        <property name="urlQueue" ref="internalUrlQueue"/>
+        <property name="responseQueue" ref="internalResponseQueue"/>
+    </bean>
+    <bean id="alwaysScheduler" class="com.automata.schedule.mode.AlwaysScheduler">
+        <property name="downloader" ref="downloader"/>
+        <property name="responseParser" ref="parser"/>
+        <property name="startUrls">
+            <list>
+                <value>https://github.com</value>
+                <value>https://stackoverflow.com/</value>
+            </list>
+        </property>
+        <property name="repeatIntervalSeconds" value="5"/>
+        <property name="threadPools" ref="threadPools"/>
+        <property name="pollWaitSeconds" value="10"/>
+        <property name="urlQueue" ref="internalUrlQueue"/>
+        <property name="responseQueue" ref="internalResponseQueue"/>
+    </bean>
+
+    <bean id="engine" class="com.automata.engine.ScrapyEngine" init-method="start">
+        <!--<property name="scheduler" ref="onceScheduler"/>-->
+        <!--<property name="scheduler" ref="oneCycleScheduler"/>-->
+        <property name="scheduler" ref="alwaysScheduler"/>
+    </bean>
+</beans>
