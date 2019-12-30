@@ -47,7 +47,7 @@ public class OneCycleScheduler extends Scheduler {
                     break;
                 }
                 try {
-                    final String url = (String) ((LinkedBlockingQueue) getUrlQueue().getQueue()).poll(getPollWaitSeconds(), TimeUnit.SECONDS);
+                    final String url = (String) getUrlQueue().blockPoll(getPollWaitSeconds().longValue());
                     if (StringUtils.isNotBlank(url)) {
                         isRunning = true;
                         getThreadPools().addDownloadTask(new Runnable() {

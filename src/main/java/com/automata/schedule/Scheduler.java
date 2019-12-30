@@ -52,7 +52,7 @@ public abstract class Scheduler {
                         break;
                     }
                     try {
-                        final String response = (String) ((LinkedBlockingQueue) getResponseQueue().getQueue()).poll(getPollWaitSeconds(), TimeUnit.SECONDS);
+                        final String response = (String) getResponseQueue().blockPoll(getPollWaitSeconds().longValue());
                         if (StringUtils.isNotBlank(response)) {
                             isRunningR = true;
                             getThreadPools().addParseTask(new Runnable() {
@@ -82,7 +82,7 @@ public abstract class Scheduler {
                         break;
                     }
                     try {
-                        final String url = (String) ((LinkedBlockingQueue) getUrlQueue().getQueue()).poll(getPollWaitSeconds(), TimeUnit.SECONDS);
+                        final String url = (String) getUrlQueue().blockPoll(getPollWaitSeconds().longValue());
                         if (StringUtils.isNotBlank(url)) {
                             isRunning = true;
                             getThreadPools().addDownloadTask(new Runnable() {

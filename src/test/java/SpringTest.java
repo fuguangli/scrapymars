@@ -19,9 +19,6 @@ public class SpringTest {
     @Test
     public void test() throws InterruptedException {
         System.out.println("bean init");
-
-        List<String> startUrls=new ArrayList<>();
-        startUrls.add("https://github.com");
 //        Thread.sleep(Long.MAX_VALUE);
     }
 }

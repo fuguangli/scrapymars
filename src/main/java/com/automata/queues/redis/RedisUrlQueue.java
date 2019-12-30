@@ -18,7 +18,13 @@ public class RedisUrlQueue implements StorageQueue {
         return null;
     }
 
-    public Object getQueue() {
+    @Override
+    public Object blockPoll(Long waitSeconds) {
+        return null;
+    }
+
+    @Override
+    public Object blockPush(Long waitSeconds, Object element) {
         return null;
     }
 }

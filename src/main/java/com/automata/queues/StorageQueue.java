@@ -23,5 +23,7 @@ public interface StorageQueue {
      */
     Object pull(Object args);
 
-    Object getQueue();
+    Object blockPoll(Long waitSeconds);
+
+    Object blockPush(Long waitSeconds,Object element);
 }

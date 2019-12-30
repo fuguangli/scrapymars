@@ -3,6 +3,7 @@ package com.automata.queues.internal;
 import com.automata.queues.StorageQueue;
 
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * name fuguangli
@@ -28,7 +29,24 @@ public class InternalResponseQueue implements StorageQueue {
         return queue.poll();
     }
 
-    public Object getQueue() {
-        return this.queue;
+    @Override
+    public Object blockPoll(Long waitSeconds) {
+        try {
+            return queue.poll(waitSeconds, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Object blockPush(Long waitSeconds, Object element) {
+
+        try {
+            return queue.offer((String) element, waitSeconds, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
