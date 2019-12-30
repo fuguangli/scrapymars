@@ -7,10 +7,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-
 /**
  * name fuguangli
  * date 2019/12/25
@@ -47,7 +43,7 @@ public class OneCycleScheduler extends Scheduler {
                     break;
                 }
                 try {
-                    final String url = (String) getUrlQueue().blockPoll(getPollWaitSeconds().longValue());
+                    final String url = (String) getUrlQueue().blockPull(getPollWaitSeconds().longValue());
                     if (StringUtils.isNotBlank(url)) {
                         isRunning = true;
                         getThreadPools().addDownloadTask(new Runnable() {

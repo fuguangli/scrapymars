@@ -9,8 +9,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.io.InputStream;
 
@@ -28,9 +26,7 @@ public class SampleParser implements IResponseParser {
         return null;
     }
 
-    @Autowired
-    @Qualifier("internalUrlQueue")
-    StorageQueue internalUrlQueue;
+    private StorageQueue extraUrlQueue;
 
     public Object parse(String response) {
         /*{"url":"xxx","content":"xxx"}*/
@@ -45,9 +41,17 @@ public class SampleParser implements IResponseParser {
 
         String href = doc.select("a.jumbotron-link").eq(0).attr("href");
         if (StringUtils.isNotBlank(href)) {
-            internalUrlQueue.push("https://github.com" + href);
-            logger.info("push to internalUrlQueue");
+            extraUrlQueue.push("https://github.com" + href);
+            logger.info("push to UrlQueue");
         }
         return null;
+    }
+
+    public StorageQueue getExtraUrlQueue() {
+        return extraUrlQueue;
+    }
+
+    public void setExtraUrlQueue(StorageQueue extraUrlQueue) {
+        this.extraUrlQueue = extraUrlQueue;
     }
 }

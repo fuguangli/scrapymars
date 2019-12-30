@@ -11,11 +11,11 @@ import java.util.concurrent.TimeUnit;
  * date 2019/12/24
  * contact businessfgl@163.com
  */
-public class RedisUrlQueue implements StorageQueue {
+public class RedisResponseQueue implements StorageQueue {
     @Autowired
     RedisTemplate<String, String> redisTemplate;
 
-    private String queueKey = "UrlQueue";
+    private String queueKey = "ResponseQueue";
 
     public Object push(Object args) {
         return redisTemplate.opsForList().leftPush(queueKey, (String) args);

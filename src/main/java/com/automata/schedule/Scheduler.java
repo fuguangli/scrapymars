@@ -9,9 +9,6 @@ import com.automata.threads.ThreadPools;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-
 /**
  * name fuguangli
  * date 2019/12/25
@@ -52,7 +49,7 @@ public abstract class Scheduler {
                         break;
                     }
                     try {
-                        final String response = (String) getResponseQueue().blockPoll(getPollWaitSeconds().longValue());
+                        final String response = (String) getResponseQueue().blockPull(getPollWaitSeconds().longValue());
                         if (StringUtils.isNotBlank(response)) {
                             isRunningR = true;
                             getThreadPools().addParseTask(new Runnable() {
@@ -82,7 +79,7 @@ public abstract class Scheduler {
                         break;
                     }
                     try {
-                        final String url = (String) getUrlQueue().blockPoll(getPollWaitSeconds().longValue());
+                        final String url = (String) getUrlQueue().blockPull(getPollWaitSeconds().longValue());
                         if (StringUtils.isNotBlank(url)) {
                             isRunning = true;
                             getThreadPools().addDownloadTask(new Runnable() {

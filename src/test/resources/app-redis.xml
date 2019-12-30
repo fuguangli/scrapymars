@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//Spring//DTD Bean//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- Application Context -->
+<beans>
+	<bean id="connectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="poolConfig">
+			<bean class="redis.clients.jedis.JedisPoolConfig">
+				<property name="maxIdle" value="${redis.maxIdle}"></property>
+				<property name="maxTotal" value="${redis.maxTotal}"></property>
+				<property name="maxWaitMillis" value="${redis.maxWaitMillis}"></property>
+				<property name="testOnBorrow" value="${redis.testOnBorrow}"></property>
+				<property name="testOnReturn" value="${redis.testOnReturn}"></property>
+			</bean>
+		</property>
+		<property name="hostName" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="password" value="${redis.password}" />
+		<property name="timeout" value="${redis.timeout}" />
+	</bean>
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory">
+			<ref bean="connectionFactory" />
+		</property>
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="HashKeySerializer">  
+   	 		<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>  
+		</property>    
+		<property name="HashValueSerializer">  
+    		<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>  
+		</property>
+	</bean>
+</beans>

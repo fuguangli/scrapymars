@@ -21,11 +21,8 @@
         </property>-->
     </bean>
 
-    <bean id="internalUrlQueue" class="com.automata.queues.internal.InternalUrlQueue">
-    </bean>
-
-    <bean id="internalResponseQueue" class="com.automata.queues.internal.InternalResponseQueue">
-    </bean>
+    <bean id="redisUrlQueue" class="com.automata.queues.redis.RedisUrlQueue"/>
+    <bean id="redisResponseQueue" class="com.automata.queues.redis.RedisResponseQueue"/>
 
     <bean id="threadPools" class="com.automata.threads.ThreadPools">
         <constructor-arg index="0" value="5"></constructor-arg>
@@ -34,7 +31,7 @@
     </bean>
 
     <bean id="parser" class="sample.parser.SampleParser">
-        <property name="extraUrlQueue" ref="internalUrlQueue"/>
+        <property name="extraUrlQueue" ref="redisUrlQueue"/>
     </bean>
 
 
@@ -58,8 +55,8 @@
         </property>
         <property name="threadPools" ref="threadPools"/>
         <property name="pollWaitSeconds" value="30"/>
-        <property name="urlQueue" ref="internalUrlQueue"/>
-        <property name="responseQueue" ref="internalResponseQueue"/>
+        <property name="urlQueue" ref="redisUrlQueue"/>
+        <property name="responseQueue" ref="redisResponseQueue"/>
     </bean>
     <bean id="alwaysScheduler" class="com.automata.schedule.mode.AlwaysScheduler">
         <property name="downloader" ref="downloader"/>
@@ -73,8 +70,8 @@
         <property name="repeatIntervalSeconds" value="5"/>
         <property name="threadPools" ref="threadPools"/>
         <property name="pollWaitSeconds" value="10"/>
-        <property name="urlQueue" ref="internalUrlQueue"/>
-        <property name="responseQueue" ref="internalResponseQueue"/>
+        <property name="urlQueue" ref="redisUrlQueue"/>
+        <property name="responseQueue" ref="redisResponseQueue"/>
     </bean>
 
     <bean id="engine" class="com.automata.engine.ScrapyEngine" init-method="start">

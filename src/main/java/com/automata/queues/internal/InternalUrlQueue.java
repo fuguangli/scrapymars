@@ -30,7 +30,7 @@ public class InternalUrlQueue implements StorageQueue {
     }
 
     @Override
-    public Object blockPoll(Long waitSeconds) {
+    public Object blockPull(Long waitSeconds) {
         try {
             return queue.poll(waitSeconds, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
