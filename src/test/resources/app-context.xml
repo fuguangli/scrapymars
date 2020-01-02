@@ -38,15 +38,17 @@
     </bean>
 
 
-    <!--<bean id="onceScheduler" class="com.automata.schedule.mode.OnceScheduler">
+    <bean id="onceScheduler" class="com.automata.schedule.mode.OnceScheduler">
         <property name="downloader" ref="downloader"/>
         <property name="responseParser" ref="parser"/>
         <property name="startUrls">
             <list>
                 <value>https://github.com</value>
+                <value>https://wx2.sinaimg.cn/mw690/5c596b7ely1ga4h3q09tmj24802di1l2.jpg</value>
             </list>
         </property>
-    </bean>-->
+        <!--<property name="fileSaveDir" value="你的存储文件的主目录"/>-->
+    </bean>
     <bean id="oneCycleScheduler" class="com.automata.schedule.mode.OneCycleScheduler">
         <property name="downloader" ref="downloader"/>
         <property name="responseParser" ref="parser"/>
@@ -54,12 +56,14 @@
             <list>
                 <value>https://github.com</value>
                 <value>https://stackoverflow.com/</value>
+                <value>https://wx2.sinaimg.cn/mw690/5c596b7ely1ga4h3q09tmj24802di1l2.jpg</value>
             </list>
         </property>
         <property name="threadPools" ref="threadPools"/>
         <property name="pollWaitSeconds" value="30"/>
         <property name="urlQueue" ref="internalUrlQueue"/>
         <property name="responseQueue" ref="internalResponseQueue"/>
+        <!--<property name="fileSaveDir" value="你的存储文件的主目录"/>-->
     </bean>
     <bean id="alwaysScheduler" class="com.automata.schedule.mode.AlwaysScheduler">
         <property name="downloader" ref="downloader"/>
@@ -68,6 +72,7 @@
             <list>
                 <value>https://github.com</value>
                 <value>https://stackoverflow.com/</value>
+                <value>https://wx2.sinaimg.cn/mw690/5c596b7ely1ga4h3q09tmj24802di1l2.jpg</value>
             </list>
         </property>
         <property name="repeatIntervalSeconds" value="5"/>
@@ -75,11 +80,12 @@
         <property name="pollWaitSeconds" value="10"/>
         <property name="urlQueue" ref="internalUrlQueue"/>
         <property name="responseQueue" ref="internalResponseQueue"/>
+        <!--<property name="fileSaveDir" value="你的存储文件的主目录"/>-->
     </bean>
 
     <bean id="engine" class="com.automata.engine.ScrapyEngine" init-method="start">
-        <!--<property name="scheduler" ref="onceScheduler"/>-->
+        <property name="scheduler" ref="onceScheduler"/>
         <!--<property name="scheduler" ref="oneCycleScheduler"/>-->
-        <property name="scheduler" ref="alwaysScheduler"/>
+        <!--<property name="scheduler" ref="alwaysScheduler"/>-->
     </bean>
 </beans>

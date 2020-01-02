@@ -6,15 +6,20 @@ import com.automata.parser.IResponseParser;
 import com.automata.queues.StorageQueue;
 import com.automata.request.Request;
 import com.automata.threads.ThreadPools;
+import com.automata.utils.BUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+
 /**
  * name fuguangli
  * date 2019/12/25
  * contact businessfgl@163.com
  */
 public abstract class Scheduler {
+    Logger logger = LoggerFactory.getLogger(getClass());
     private ThreadPools threadPools;
     private StorageQueue urlQueue;
     private StorageQueue responseQueue;
@@ -23,6 +28,8 @@ public abstract class Scheduler {
     private IResponseParser responseParser;
 
     private List<String> startUrls;
+    private List<String> binarySuffixes;
+    private String fileSaveDir;
 
     /*for urlQueue*/
     protected boolean isRunning = true;
@@ -82,17 +89,7 @@ public abstract class Scheduler {
                         final String url = (String) getUrlQueue().blockPull(getPollWaitSeconds().longValue());
                         if (StringUtils.isNotBlank(url)) {
                             isRunning = true;
-                            getThreadPools().addDownloadTask(new Runnable() {
-                                public void run() {
-                                    String content = getDownloader().getContent(new Request(url));
-                                    if (StringUtils.isNotBlank(content)) {
-                                        JSONObject block = new JSONObject();
-                                        block.put("url", url);
-                                        block.put("content", content);
-                                        getResponseQueue().push(block.toJSONString());
-                                    }
-                                }
-                            });
+                            addDownload(url);
                         } else {
                             isRunning = false;
                         }
@@ -101,6 +98,25 @@ public abstract class Scheduler {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                }
+            }
+        });
+    }
+
+    protected void addDownload(String url) {
+        getThreadPools().addDownloadTask(new Runnable() {
+            public void run() {
+                if (BUtil.isBinary(getBinarySuffixes(), url) && StringUtils.isNotBlank(getFileSaveDir())) {
+                    BUtil.save(getDownloader(), url, getFileSaveDir());
+                    return;
+                }
+
+                String content = getDownloader().getContent(new Request(url));
+                if (StringUtils.isNotBlank(content)) {
+                    JSONObject block = new JSONObject();
+                    block.put("url", url);
+                    block.put("content", content);
+                    getResponseQueue().push(block.toJSONString());
                 }
             }
         });
@@ -160,5 +176,21 @@ public abstract class Scheduler {
 
     public void setDownloader(IDownloader downloader) {
         this.downloader = downloader;
+    }
+
+    public List<String> getBinarySuffixes() {
+        return binarySuffixes;
+    }
+
+    public void setBinarySuffixes(List<String> binarySuffixes) {
+        this.binarySuffixes = binarySuffixes;
+    }
+
+    public String getFileSaveDir() {
+        return fileSaveDir;
+    }
+
+    public void setFileSaveDir(String fileSaveDir) {
+        this.fileSaveDir = fileSaveDir;
     }
 }

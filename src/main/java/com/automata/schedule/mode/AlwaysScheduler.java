@@ -1,10 +1,7 @@
 package com.automata.schedule.mode;
 
-import com.alibaba.fastjson.JSONObject;
-import com.automata.request.Request;
 import com.automata.schedule.Scheduler;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,17 +23,7 @@ public class AlwaysScheduler extends Scheduler {
                 try {
                     for (final String url : getStartUrls()) {
                         logger.debug("request url-->" + url);
-                        getThreadPools().addDownloadTask(new Runnable() {
-                            public void run() {
-                                String content = getDownloader().getContent(new Request(url));
-                                if (StringUtils.isNotBlank(content)) {
-                                    JSONObject block = new JSONObject();
-                                    block.put("url", url);
-                                    block.put("content", content);
-                                    getResponseQueue().push(block.toJSONString());
-                                }
-                            }
-                        });
+                        addDownload(url);
                     }
 
                     Thread.sleep(getRepeatIntervalSeconds() * 1000);
