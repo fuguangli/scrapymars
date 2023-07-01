@@ -1,0 +1,41 @@
+# Maven build directory
+target/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# IntelliJ project files
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# Compiled Java classes
+*.class
+
+# Logs
+log/
+logs/
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+
+# IDE-specific files
+*.swp
+*~
+*.idea/
+*.iml
+*.ipr
+*.iws
+
+# macOS-specific files
+.DS_Store
+
+# Windows-specific files
+Thumbs.db

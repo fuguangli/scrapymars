@@ -149,8 +149,9 @@
 
 
 ###### _*温馨提示：请遵守网站的robots协议_
-###### 软件完全开源，制作不易，如果你想支持作者的话：
-![谢谢您的支持](https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/c979a64a60a15bc09f3e7c8d8a2d66daaad1fb830c7fd9f5f99e94402f32cc6eabd38f54abef753ac9a8540b09b4a8ba?pictype=scale&from=30013&version=3.3.3.3&uin=1830724319&fname=2019-12-28%20145059.jpg&size=300)
-![谢谢您的支持](https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/00880264f187e8902116a53e683146a14d40bdf64694aa5a6a04ab01ee4a0b1c5d06a63cb7402298b9c8374e2fb07e1f?pictype=scale&from=30013&version=3.3.3.3&uin=1830724319&fname=2019-12-28%20150131.jpg&size=300)
+###### 软件完全开源，制作不易，如果您想支持作者的话：
+<img src="https://homesteader.oss-cn-beijing.aliyuncs.com/wepaycode.png" alt="谢谢您的支持" width="300">
+<img src="https://homesteader.oss-cn-beijing.aliyuncs.com/alipaycode.jpg" alt="谢谢您的支持" width="300">
+
 
 ###### 感谢您的支持！
