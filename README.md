@@ -150,8 +150,10 @@
 
 ###### _*温馨提示：请遵守网站的robots协议_
 ###### 软件完全开源，制作不易，如果您想支持作者的话：
-<img src="https://homesteader.oss-cn-beijing.aliyuncs.com/wepaycode.png" alt="谢谢您的支持" width="300">
-<img src="https://homesteader.oss-cn-beijing.aliyuncs.com/alipaycode.jpg" alt="谢谢您的支持" width="300">
+<div style="display: flex;">
+    <img src="https://homesteader.oss-cn-beijing.aliyuncs.com/wepaycode.png" alt="谢谢您的支持" width="300" height="auto">
+    <img src="https://homesteader.oss-cn-beijing.aliyuncs.com/alipaycode.jpg" alt="谢谢您的支持" width="300" height="auto">
+</div>
 
 
 ###### 感谢您的支持！
