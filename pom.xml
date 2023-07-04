@@ -293,12 +293,16 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <keyname>291E246B319A3BB6DFEDBD57434719336EDF4B98</keyname>
+                    <passphrase>QWER1234</passphrase>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
+                <version>1.6.13</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
