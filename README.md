@@ -1,3 +1,4 @@
+[![Maven Central](https://img.shields.io/maven-central/v/group-id/artifact-id.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.github.fuguangli/scrapy-mars)
 # 这可能是目前 使用最简单的功能强大的java爬虫框架  
 
 ## 特征：可使用性、高扩展性、功能强大  
