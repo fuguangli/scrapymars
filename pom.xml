@@ -10,7 +10,7 @@
 
     <name>scrapy-mars</name>
     <description> This project is a practical crawler project written in java language, which can easily obtain the required information on the Internet</description>
-
+    <url>https://github.com/fuguangli/scrapymars</url>
     <packaging>jar</packaging>
 
     <developers>
